@@ -133,6 +133,7 @@ const styles = StyleSheet.create({
     textShadowOffset: { width: 1, height: 2 },
     textShadowRadius: 8,
     letterSpacing: 1,
+    marginBottom: 10,
   },
   subscription: {
     fontSize: 16,
