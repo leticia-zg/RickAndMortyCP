@@ -74,7 +74,7 @@ export default function RickAndMortyQuiz() {
   useEffect(() => {
     axios
       .get("https://rickandmortyapi.com/api/character?page=1")
-      .then((res) => setCharacters(res.data.results.slice(0, 6)))
+      .then((res) => setCharacters(res.data.results.slice(0,10)))
       .catch((err) => console.error(err));
   }, []);
 
@@ -136,9 +136,13 @@ export default function RickAndMortyQuiz() {
   const current = questions[currentQuestion];
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Pergunta {currentQuestion + 1}/10</Text>
-      <Text style={styles.question}>{current.question}</Text>
+  <View style={styles.container}>
+    <View style={styles.characterContainer}>
+      <Image source={{ uri: selectedCharacter.image }} style={styles.charImageLarge} />
+      <Text style={styles.charName}>{selectedCharacter.name}</Text>
+    </View>
+    <Text style={styles.title}>Pergunta {currentQuestion + 1}/10</Text>
+    <Text style={styles.question}>{current.question}</Text>
       {current.options.map((option, index) => (
         <TouchableOpacity
           key={index}
@@ -158,20 +162,25 @@ const { width } = Dimensions.get("window");
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
     backgroundColor: "#0A0A18",
-    alignItems: "center",
     justifyContent: "center",
+    alignItems: "center",
   },
   listContainer: {
     justifyContent: "center",
+    alignItems: "center",
   },
   title: {
-    fontSize: 26,
+    fontSize: 28,
     fontWeight: "bold",
     color: "#5CF1FF",
-    marginBottom: 20,
     textAlign: "center",
+    paddingHorizontal: 16,
+    textShadowColor: "#00B5CC",
+    textShadowOffset: { width: 1, height: 2 },
+    textShadowRadius: 8,
+    letterSpacing: 1,
+    marginTop: 35,
   },
   question: {
     fontSize: 20,
@@ -185,7 +194,7 @@ const styles = StyleSheet.create({
     padding: 14,
     borderRadius: 8,
     marginVertical: 8,
-    width: "100%",
+    width: "80%",
     borderWidth: 1,
     borderColor: "#5CF1FF",
   },
@@ -230,4 +239,18 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 16,
   },
+  characterContainer: {
+  alignItems: "center",
+  marginTop: 30,
+  marginBottom: 10,
+},
+charImageLarge: {
+  width: 120,
+  height: 120,
+  borderRadius: 60,
+  borderWidth: 2,
+  borderColor: "#5CF1FF",
+  marginBottom: 8,
+},
+
 });
