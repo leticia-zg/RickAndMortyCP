@@ -146,7 +146,6 @@ export default function App() {
 
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
-  // Estados para confete
   const [showConfetti, setShowConfetti] = useState(false);
   const [confettiOrigin, setConfettiOrigin] = useState({ x: 0, y: 0 });
 
@@ -215,7 +214,6 @@ export default function App() {
   };
 
   const handleShowConfetti = (origin) => {
-    // Origem X igual à estrela clicada, Y fixo no topo (0) para confete cair da parte de cima da tela
     setConfettiOrigin({ x: origin.x, y: 0 });
     setShowConfetti(true);
     setTimeout(() => setShowConfetti(false), 3000);
@@ -259,14 +257,12 @@ export default function App() {
           />
         </Animated.View>
       )}
-
-      {/* Confete sobre a tela toda */}
       {showConfetti && (
         <ConfettiCannon
           count={50}
           origin={confettiOrigin}
           fadeOut={true}
-          fallSpeed={3000}    // queda mais lenta para cair até o fim da tela
+          fallSpeed={3000}    
           explosionSpeed={350}
         />
       )}
